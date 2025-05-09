@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyFlow - 学习本应愉快</title>
+  <link rel="stylesheet" href="../src/styles/main.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>StudyFlow</h1>
+      <nav class="main-nav">
+        <button class="nav-btn active" data-page="home">首页</button>
+        <button class="nav-btn" data-page="pomodoro">专注计时</button>
+        <button class="nav-btn" data-page="review">复习提醒</button>
+        <button class="nav-btn" data-page="methods">学习方法</button>
+        <button class="nav-btn" data-page="plan">学习计划</button>
+        <button class="nav-btn" data-page="notes">笔记系统</button>
+      </nav>
+    </header>
+
+    <main class="app-content">
+      <!-- 首页内容 -->
+      <section id="home-page" class="page active">
+        <div class="welcome-section">
+          <h2>欢迎使用 StudyFlow</h2>
+          <p>你的个人学习助手，帮助你更高效地学习</p>
+        </div>
+        
+        <div class="today-summary">
+          <h3>今日学习计划</h3>
+          <div class="summary-content">
+            <p>暂无学习计划，点击"复习提醒"添加你的第一个学习项目。</p>
+          </div>
+        </div>
+        
+        <!-- 使用指南 -->
+        <div class="user-guide">
+          <h3>使用指南</h3>
+          <div class="guide-content">
+            <div class="guide-section">
+              <h4>专注计时</h4>
+              <p>利用番茄工作法提高学习效率。默认设置为工作25分钟，休息5分钟。可根据个人习惯调整时间。</p>
+            </div>
+            <div class="guide-section">
+              <h4>复习提醒</h4>
+              <p>基于艾宾浩斯遗忘曲线，为您的学习内容创建科学的复习计划。系统会根据难度自动调整复习间隔。</p>
+            </div>
+            <div class="guide-section">
+              <h4>学习方法</h4>
+              <p>收集了多种高效学习方法，帮助您掌握不同类型的知识。可以按难度、分类筛选，找到最适合当前学习内容的方法。</p>
+            </div>
+            <div class="guide-section">
+              <h4>学习计划</h4>
+              <p>根据您的学习科目、目标和时间，自动生成定制化学习计划，包括推荐学习方法、时间表安排和学习里程碑。</p>
+            </div>
+            <div class="guide-section">
+              <h4>笔记系统</h4>
+              <p>提供普通笔记和康奈尔笔记两种模板，帮助整理学习内容。支持标签管理和笔记导出功能。</p>
+            </div>
+            <div class="guide-tip">
+              <p>提示：点击首页的今日学习计划项目可直接跳转到复习提醒页面查看详情。使用左上角的导航栏在不同功能间切换。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quick-actions">
+          <h3>快速操作</h3>
+          <div class="action-buttons">
+            <button class="action-btn" data-action="start-pomodoro">开始专注</button>
+            <button class="action-btn" data-action="add-review">添加复习项目</button>
+            <button class="action-btn" data-action="new-note">创建笔记</button>
+            <button class="action-btn" data-action="browse-methods">浏览学习方法</button>
+            <button class="action-btn" data-action="create-plan">定制学习计划</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 专注计时内容 -->
+      <section id="pomodoro-page" class="page">
+        <h2>专注计时器</h2>
+        <div class="pomodoro-container">
+          <div class="timer-display">
+            <div class="timer">25:00</div>
+            <div class="timer-label">工作时间</div>
+          </div>
+          
+          <div class="timer-controls">
+            <button id="start-timer">开始</button>
+            <button id="pause-timer" disabled>暂停</button>
+            <button id="reset-timer">重置</button>
+          </div>
+          
+          <div class="session-counter">
+            <span>今日专注：</span>
+            <span id="session-count">0</span>
+            <span>次</span>
+          </div>
+          
+          <div class="settings-section">
+            <h3>设置</h3>
+            <div class="setting-item">
+              <label for="work-duration">工作时间 (分钟):</label>
+              <input type="number" id="work-duration" min="1" max="60" value="25">
+            </div>
+            <div class="setting-item">
+              <label for="break-duration">休息时间 (分钟):</label>
+              <input type="number" id="break-duration" min="1" max="30" value="5">
+            </div>
+            <button id="save-settings">保存设置</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 学习方法库页面 -->
+      <section id="methods-page" class="page">
+        <h2>学习方法库</h2>
+        
+        <div class="methods-filters">
+          <div class="search-filter">
+            <input type="text" id="method-search" placeholder="搜索学习方法...">
+          </div>
+          
+          <div class="category-filter">
+            <label for="method-category-filter">分类：</label>
+            <select id="method-category-filter">
+              <option value="all">所有分类</option>
+              <!-- 分类将动态加载 -->
+            </select>
+          </div>
+          
+          <div class="difficulty-filter">
+            <label for="method-difficulty-filter">难度：</label>
+            <select id="method-difficulty-filter">
+              <option value="all">所有难度</option>
+              <option value="低">简单</option>
+              <option value="中等">中等</option>
+              <option value="高">困难</option>
+            </select>
+          </div>
+          
+          <button id="method-reset-filter" class="reset-filter-btn">重置筛选</button>
+        </div>
+        
+        <div class="methods-container">
+          <!-- 学习方法卡片将在这里动态生成 -->
+        </div>
+
+        <!-- 学习方法详情弹窗 -->
+        <div class="method-detail-modal" id="method-detail-modal">
+          <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-method-title"></h3>
+            <div id="modal-method-content"></div>
+          </div>
+        </div>
+        
+        <!-- 编辑学习方法弹窗 -->
+        <div class="method-edit-modal" id="method-edit-modal">
+          <div class="modal-content">
+            <span class="close-edit-modal">&times;</span>
+            <h3>编辑学习方法</h3>
+            <form id="method-edit-form">
+              <div class="form-group">
+                <label for="method-name">名称</label>
+                <input type="text" id="method-name" required>
+              </div>
+              <div class="form-group">
+                <label for="method-short-description">简短描述</label>
+                <textarea id="method-short-description" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="method-category">分类</label>
+                <select id="method-category" required>
+                  <option value="理解与记忆">理解与记忆</option>
+                  <option value="记忆与复习">记忆与复习</option>
+                  <option value="组织与理解">组织与理解</option>
+                  <option value="时间管理">时间管理</option>
+                  <option value="阅读与理解">阅读与理解</option>
+                  <option value="笔记与整理">笔记与整理</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="method-difficulty">难度</label>
+                <select id="method-difficulty" required>
+                  <option value="低">简单</option>
+                  <option value="中等">中等</option>
+                  <option value="高">困难</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="method-time-required">所需时间</label>
+                <select id="method-time-required" required>
+                  <option value="短">短</option>
+                  <option value="中等">中等</option>
+                  <option value="长">长</option>
+                  <option value="长期">长期</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="method-full-description">详细描述 (支持HTML格式)</label>
+                <textarea id="method-full-description" rows="10" required></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="primary-btn">保存</button>
+                <button type="button" id="cancel-edit-btn">取消</button>
+                <button type="button" id="delete-method-btn" class="danger-btn">删除</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 间隔复习提醒系统 -->
+      <section id="review-page" class="page">
+        <h2>间隔复习提醒</h2>
+        
+        <div class="review-container">
+          <!-- 添加复习项目表单 -->
+          <div class="review-form-container">
+            <h3>添加学习项目</h3>
+            <form id="review-form">
+              <div class="form-group">
+                <label for="item-title">项目名称</label>
+                <input type="text" id="item-title" required placeholder="例如：线性代数第一章">
+              </div>
+              <div class="form-group">
+                <label for="item-description">项目描述 (可选)</label>
+                <textarea id="item-description" placeholder="简要描述学习内容"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="item-first-date">首次学习日期</label>
+                <input type="date" id="item-first-date" required>
+              </div>
+              <div class="form-group">
+                <label for="item-difficulty">难度级别</label>
+                <select id="item-difficulty">
+                  <option value="easy">简单</option>
+                  <option value="medium" selected>中等</option>
+                  <option value="hard">困难</option>
+                </select>
+              </div>
+              <button type="submit" class="primary-btn">添加项目</button>
+            </form>
+          </div>
+
+          <!-- 复习日历 -->
+          <div class="review-calendar">
+            <h3>复习日历</h3>
+            <div class="calendar-header">
+              <button id="prev-month">&lt;</button>
+              <div id="current-month">2023年5月</div>
+              <button id="next-month">&gt;</button>
+            </div>
+            <div class="calendar-grid">
+              <!-- 日历内容将在这里动态生成 -->
+            </div>
+          </div>
+
+          <!-- 今日待复习列表 -->
+          <div class="review-today">
+            <h3>今日待复习</h3>
+            <div class="today-review-list">
+              <!-- 今日复习项目将在这里动态生成 -->
+              <p class="empty-list-message">今日暂无复习项目</p>
+            </div>
+          </div>
+
+          <!-- 所有复习项目列表 -->
+          <div class="review-all-items">
+            <h3>所有学习项目</h3>
+            
+            <!-- 添加搜索和筛选框 -->
+            <div class="review-items-filters">
+              <div class="review-search">
+                <input type="text" id="review-item-search" placeholder="搜索学习项目...">
+              </div>
+              <div class="review-filter">
+                <label for="review-difficulty-filter">难度：</label>
+                <select id="review-difficulty-filter">
+                  <option value="all">所有难度</option>
+                  <option value="easy">简单</option>
+                  <option value="medium">中等</option>
+                  <option value="hard">困难</option>
+                </select>
+              </div>
+              <button id="review-reset-filter" class="reset-filter-btn">重置筛选</button>
+            </div>
+            
+            <div class="review-items-list">
+              <!-- 所有复习项目将在这里动态生成 -->
+              <p class="empty-list-message">暂无学习项目，请添加</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 笔记系统页面 -->
+      <section id="notes-page" class="page">
+        <h2>笔记系统</h2>
+        <div class="notes-container">
+          <!-- 笔记列表 -->
+          <div class="notes-list-container">
+            <div class="notes-list-header">
+              <h3>我的笔记</h3>
+              <button id="new-note-btn" class="primary-btn">新建笔记</button>
+            </div>
+            <div class="notes-search">
+              <input type="text" id="note-search" placeholder="搜索笔记...">
+            </div>
+            <div class="notes-list">
+              <!-- 笔记列表项将在这里动态生成 -->
+              <p class="empty-list-message">暂无笔记，点击"新建笔记"创建</p>
+            </div>
+          </div>
+          
+          <!-- 笔记编辑区 -->
+          <div class="note-editor-container">
+            <div class="note-editor-header">
+              <input type="text" id="note-title" placeholder="笔记标题">
+              <div class="note-editor-actions">
+                <select id="note-template">
+                  <option value="normal">普通笔记</option>
+                  <option value="cornell">康奈尔笔记</option>
+                </select>
+                <button id="save-note-btn">保存</button>
+                <button id="export-note-btn">导出</button>
+                <button id="delete-note-btn">删除</button>
+              </div>
+            </div>
+            
+            <!-- 普通笔记编辑器 -->
+            <div id="normal-editor" class="note-editor active">
+              <textarea id="note-content" placeholder="在此输入笔记内容..."></textarea>
+            </div>
+            
+            <!-- 康奈尔笔记编辑器 -->
+            <div id="cornell-editor" class="note-editor">
+              <div class="cornell-header">
+                <input type="text" id="cornell-title" placeholder="笔记主题">
+                <input type="text" id="cornell-date" placeholder="日期">
+              </div>
+              <div class="cornell-body">
+                <div class="cornell-cues">
+                  <h4>线索区</h4>
+                  <textarea id="cornell-cues-content" placeholder="记录关键词、问题..."></textarea>
+                </div>
+                <div class="cornell-notes">
+                  <h4>笔记区</h4>
+                  <textarea id="cornell-notes-content" placeholder="记录课堂笔记、要点..."></textarea>
+                </div>
+              </div>
+              <div class="cornell-summary">
+                <h4>总结区</h4>
+                <textarea id="cornell-summary-content" placeholder="总结本页内容..."></textarea>
+              </div>
+            </div>
+            
+            <!-- 笔记标签区 -->
+            <div class="note-tags-container">
+              <h4>标签</h4>
+              <div class="tags-input-container">
+                <input type="text" id="tag-input" placeholder="添加标签...">
+                <button id="add-tag-btn">添加</button>
+              </div>
+              <div class="tags-list">
+                <!-- 标签将在这里动态生成 -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 学习计划定制页面 -->
+      <section id="plan-page" class="page">
+        <h2>定制学习计划</h2>
+        
+        <div class="plan-container">
+          <!-- 创建学习计划表单 -->
+          <div class="plan-form-container">
+            <h3>输入学习目标</h3>
+            <form id="plan-form">
+              <div class="form-group">
+                <label for="plan-subject">学习科目/主题</label>
+                <input type="text" id="plan-subject" required placeholder="例如：高等数学、编程语言、外语学习">
+              </div>
+              <div class="form-group">
+                <label for="plan-goal">具体学习目标</label>
+                <textarea id="plan-goal" required placeholder="描述您想要达成的具体目标，例如：掌握微积分基础概念并能解决常见问题"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="plan-time">每周可投入时间(小时)</label>
+                <input type="number" id="plan-time" required min="1" max="100" value="10">
+              </div>
+              <div class="form-group">
+                <label for="plan-deadline">预期完成日期(可选)</label>
+                <input type="date" id="plan-deadline">
+              </div>
+              <div class="form-group">
+                <label for="plan-level">当前水平</label>
+                <select id="plan-level" required>
+                  <option value="beginner">初学者</option>
+                  <option value="intermediate" selected>有一定基础</option>
+                  <option value="advanced">进阶水平</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="plan-learning-style">偏好的学习方式</label>
+                <select id="plan-learning-style" required>
+                  <option value="visual">视觉学习(图表、视频)</option>
+                  <option value="auditory">听觉学习(讲座、讨论)</option>
+                  <option value="reading">阅读学习(书籍、文章)</option>
+                  <option value="kinesthetic">实践学习(动手操作)</option>
+                </select>
+              </div>
+              <button type="submit" class="primary-btn">生成学习计划</button>
+            </form>
+            
+            <!-- 已保存的学习计划列表 -->
+            <div class="saved-plans-container">
+              <h3>已保存的学习计划</h3>
+              <div id="saved-plans-list" class="saved-plans-list">
+                <!-- 已保存的计划将在这里动态显示 -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 生成的学习计划展示区域 -->
+          <div class="generated-plan" id="generated-plan" style="display: none;">
+            <h3>您的定制学习计划</h3>
+            <div class="plan-summary">
+              <h4>学习目标</h4>
+              <p id="plan-summary-goal"></p>
+            </div>
+
+            <div class="plan-methods">
+              <h4>推荐学习方法</h4>
+              <div id="plan-recommended-methods"></div>
+            </div>
+
+            <div class="plan-schedule">
+              <h4>建议学习时间表</h4>
+              <div id="plan-schedule-content"></div>
+            </div>
+
+            <div class="plan-milestones">
+              <h4>学习里程碑</h4>
+              <div id="plan-milestones-content"></div>
+            </div>
+
+            <div class="plan-resources">
+              <h4>推荐学习资源</h4>
+              <div id="plan-resources-content"></div>
+            </div>
+
+            <div class="plan-actions">
+              <button id="save-plan" class="primary-btn">保存计划</button>
+              <button id="print-plan" class="secondary-btn">导出计划</button>
+              <button id="create-new-plan" class="secondary-btn">创建新计划</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>StudyFlow v1.0.0 | 高效学习工具应用</p>
+      <p class="contact-info">联系方式：studyflow-z@outlook.com VX：AMD_0099</p>
+    </footer>
+  </div>
+
+  <!-- 加载脚本 -->
+  <script src="../src/renderer.js"></script>
+</body>
+</html> 

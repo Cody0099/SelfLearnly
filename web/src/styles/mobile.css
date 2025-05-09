@@ -1,0 +1,285 @@
+/* StudyFlow 移动端样式表 */
+
+/* 基本响应式设置 */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0;
+  }
+  
+  .app-header {
+    padding: 10px;
+    flex-direction: column;
+  }
+  
+  .app-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .main-nav {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    display: none; /* 默认隐藏，通过JavaScript控制显示 */
+  }
+  
+  .main-nav.show-mobile-menu {
+    display: flex;
+  }
+  
+  .nav-btn {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  /* 移动菜单按钮 */
+  #mobile-menu-toggle {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  .menu-icon {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 0 auto;
+  }
+  
+  .menu-icon::before,
+  .menu-icon::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    left: 0;
+  }
+  
+  .menu-icon::before {
+    top: -8px;
+  }
+  
+  .menu-icon::after {
+    bottom: -8px;
+  }
+  
+  /* 页面内容适配 */
+  .app-content {
+    padding: 10px;
+  }
+  
+  .page {
+    padding: 10px;
+  }
+  
+  /* 专注计时器适配 */
+  .timer-display {
+    padding: 20px 10px;
+  }
+  
+  .timer {
+    font-size: 3rem;
+  }
+  
+  /* 学习方法卡片适配 */
+  .methods-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .method-card {
+    margin: 10px 0;
+  }
+  
+  /* 复习提醒适配 */
+  .review-list {
+    padding: 5px;
+  }
+  
+  .review-item {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* 表单元素适配 */
+  input, select, textarea {
+    font-size: 16px; /* 防止iOS自动缩放 */
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  /* 触摸优化 */
+  button, .action-btn, .nav-btn {
+    min-height: 44px; /* 触摸目标最小尺寸 */
+    min-width: 44px;
+  }
+  
+  /* 表格滚动 */
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  /* 弹窗适配 */
+  .modal-content {
+    width: 90%;
+    max-width: 90%;
+    margin: 5% auto;
+    padding: 15px;
+  }
+  
+  /* 学习计划适配 */
+  .plan-container {
+    flex-direction: column;
+  }
+  
+  .plan-sidebar, .plan-content {
+    width: 100%;
+  }
+}
+
+/* 小屏幕手机适配 */
+@media (max-width: 480px) {
+  .timer {
+    font-size: 2.5rem;
+  }
+  
+  .settings-section {
+    padding: 10px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  /* 导航栏压缩 */
+  .nav-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  
+  /* 输入框标签适配 */
+  .form-group label {
+    font-size: 0.9rem;
+  }
+}
+
+/* 横屏模式 */
+@media (max-width: 768px) and (orientation: landscape) {
+  .app-header {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .app-header h1 {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+  
+  .methods-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 隐藏桌面端元素 */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* 仅在移动端显示的元素 */
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
+/* 触摸友好的滚动条 */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 改善表单在移动端的可用性 */
+@media (max-width: 768px) {
+  input[type="checkbox"], input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 30px;
+  }
+  
+  button, .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* 双指缩放文本 */
+.zoomable-text {
+  touch-action: manipulation;
+}
+
+/* 移动端动画优化 - 减少过渡效果 */
+@media (max-width: 768px) {
+  * {
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* 适配不同设备像素比 */
+@media (max-width: 768px) and (min-resolution: 2dppx) {
+  body {
+    font-size: 16px;
+  }
+  
+  .app-header h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* 支持暗色模式 */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  .menu-icon, .menu-icon::before, .menu-icon::after {
+    background-color: #ddd;
+  }
+} 

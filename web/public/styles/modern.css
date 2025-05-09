@@ -1,0 +1,26 @@
+/* StudyFlow 现代设计系统 */
+
+:root {
+  /* 颜色系统 */
+  --primary-color: #4a6bdf;
+  --primary-light: #7790e8;
+  --primary-dark: #3552b2;
+  --accent-color: #ff7043;
+  --success-color: #4caf50;
+  --warning-color: #ffc107;
+  --error-color: #f44336;
+}
+
+/* 卡片样式 */
+.method-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.method-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
