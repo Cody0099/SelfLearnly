@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>selflearnly | 优质学习内容聚合导航</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="bg-blur"></div>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">
+          <svg width="40" height="40" viewBox="0 0 32 32">
+            <defs>
+              <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3a8dde"/>
+                <stop offset="100%" stop-color="#6f9cf7"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="28" height="28" rx="8" fill="url(#logo-gradient)"/>
+            <text x="10" y="23" font-size="16" font-family="Segoe UI, Arial, sans-serif" fill="#fff" font-weight="bold">L</text>
+          </svg>
+        </span>
+        <span class="logo-text">selflearnly</span>
+      </div>
+      <div class="header-desc">
+        <h1>优质学习内容聚合导航</h1>
+        <p>精选优质专栏，帮你高效学习，远离信息过载。</p>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍 搜索标题、作者、描述、标签..." />
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="platform-info glass">
+      <h2>平台介绍</h2>
+      <ul>
+        <li>本平台聚合各类优质学习内容，所有链接均为原始出处。</li>
+        <li>内容仅供学习参考，购买请自行甄别。</li>
+        <li>如有侵权请联系删除。</li>
+      </ul>
+    </section>
+    <section class="filters">
+      <div id="categoryFilters"></div>
+    </section>
+    <section id="loading" class="loading">加载中...</section>
+    <section id="cardGrid" class="card-grid"></section>
+  </main>
+  <footer>
+    <div class="footer-contact">
+      <img src="wechat-contact.png" alt="微信联系二维码" class="footer-qrcode" id="footer-qrcode-thumb" />
+      <span class="footer-contact-text">微信联系我</span>
+    </div>
+    <div class="links">
+      <a href="https://www.xiaobot.net/" target="_blank">小报童</a>
+      <a href="https://github.com/" target="_blank">GitHub</a>
+    </div>
+    <div class="copyright">
+      © 2024 selflearnly | 仅供学习交流
+    </div>
+  </footer>
+  <!-- 浮动二维码按钮 -->
+  <div id="qrcode-fab" class="qrcode-fab" title="推广二维码">
+    <svg width="28" height="28" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" fill="#fff"/><rect x="14" y="3" width="7" height="7" rx="2" fill="#fff"/><rect x="3" y="14" width="7" height="7" rx="2" fill="#fff"/><rect x="14" y="14" width="7" height="7" rx="2" fill="#fff"/><rect x="5" y="5" width="3" height="3" rx="1" fill="#3a8dde"/><rect x="16" y="5" width="3" height="3" rx="1" fill="#3a8dde"/><rect x="5" y="16" width="3" height="3" rx="1" fill="#3a8dde"/><rect x="16" y="16" width="3" height="3" rx="1" fill="#3a8dde"/></svg>
+  </div>
+  <!-- 二维码弹窗 -->
+  <div id="qrcode-modal" class="qrcode-modal">
+    <div class="qrcode-card">
+      <button class="qrcode-close" id="qrcode-close" title="关闭">×</button>
+      <img src="qrcode-demo.png" alt="分销二维码" class="qrcode-img" />
+      <div class="qrcode-desc">
+        <strong>扫码免费领取体验卡</strong><br>
+        获取最新情报和项目机会，收听生财大课，帮你重新理解赚钱这件事。
+      </div>
+    </div>
+  </div>
+  <!-- 微信二维码弹窗 -->
+  <div id="wechat-modal" class="qrcode-modal">
+    <div class="qrcode-card">
+      <button class="qrcode-close" id="wechat-close" title="关闭">×</button>
+      <img src="wechat-contact.png" alt="微信联系二维码" class="qrcode-img" />
+      <div class="qrcode-desc">
+        <strong>微信扫码联系我</strong><br>
+        有任何合作、咨询、交流欢迎添加微信。
+      </div>
+    </div>
+  </div>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
